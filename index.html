@@ -6,53 +6,82 @@
   <title>Formulário de Cadastro - Nitro MKT</title>
   <link rel="stylesheet" href="/src/style.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">  
 </head>
 <body>
 
-    <form id="myForm" class="bg-white p-6 rounded shadow-md max-w-lg w-full">
-      
-      <div class="mb-4 flex items-center justify-center">
-        <img src="./src/assets/logo.png" width="120">
-      </div>
-      
-      <h2 class="text-2xl font-bold mb-6 text-center">Formulário de Cadastro</h2>
-
-      <div class="grid grid-cols-2 gap-4">
-
-        <div class="flex flex-col">
-          <label for="name" class="block text-sm font-medium text-gray-700">Nome Completo:</label>
-          <input type="text" id="name" name="name" required class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded">
-          <span id="name-error" class="error-message"></span>
-        </div>
-        <div class="flex flex-col">
-          <label for="email" class="block text-sm font-medium text-gray-700">Informe seu mail:</label>
-          <input type="email" id="email" name="email" required class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded">
-          <span id="email-error" class="error-message"></span>
-        </div>
+<form id="myForm" class="bg-white p-6 rounded shadow-md max-w-lg w-full">
   
-        <div class="flex flex-col">
-          <label for="password" class="block text-sm font-medium text-gray-700">Informe sua Senha:</label>
-          <input type="password" id="password" name="password" required class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded">
-          <span id="password-error" class="error-message"></span>
-        </div>
-        <div class="flex flex-col">
-          <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirme sua Senha:</label>
-          <input type="password" id="confirm-password" name="confirm-password" required class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded">
-          <span id="confirm-password-error" class="error-message"></span>
-        </div>
-      </div>
- 
-      <div class="mt-4">
-        <button type="submit" id="submit-button" class="w-full py-2 px-4 bg-green-500 text-white font-semibold rounded hover:bg-green-700"  disabled>Enviar</button>
-      </div>
-      <p id="error-message" style="color: red"></p>
-    </form>
+  <div class="mb-4 flex items-center justify-center">
+    <img src="./src/assets/logo.png" width="120">
+  </div>
+  
+  <h2 class="text-2xl font-bold mb-6 text-center">Formulário de Cadastro</h2>
 
-    <div id="success-alert" class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white p-4 rounded shadow-lg">
-      Formulário enviado com sucesso!
+  <div class="grid grid-cols-2 gap-4">
+
+    <div class="flex flex-col">
+      <label for="name" class="block text-sm font-medium text-gray-700">Nome Completo:</label>
+      <input type="text" id="name" name="name" required
+             class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded
+                    focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    transition duration-150 ease-in-out disabled:opacity-50 disabled:pointer-events-none">
+      <span id="name-error" class="error-message"></span>
+    </div>
+    
+    <div class="flex flex-col">
+      <label for="email" class="block text-sm font-medium text-gray-700">Informe seu E-mail:</label>
+      <input type="email" id="email" name="email" required
+             class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded
+                    focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    transition duration-150 ease-in-out disabled:opacity-50 disabled:pointer-events-none">
+      <span id="email-error" class="error-message"></span>
+    </div>
+    
+    <div class="flex flex-col">
+      <label for="password" class="block text-sm font-medium text-gray-700">Informe sua Senha:</label>
+      <input type="password" id="password" name="password" required
+             class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded
+                    focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    transition duration-150 ease-in-out disabled:opacity-50 disabled:pointer-events-none">
+      <span id="password-error" class="error-message"></span>
+    </div>
+    
+    <div class="flex flex-col">
+      <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirme sua Senha:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required
+             class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded
+                    focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                    transition duration-150 ease-in-out disabled:opacity-50 disabled:pointer-events-none">
+      <span id="confirm-password-error" class="error-message"></span>
+    </div>
   </div>
 
-  <script type="module" src="/src/main.js"></script>
+  <div class="mt-4">      
+    <button id="submitBtn" type="submit" class="w-full py-2 px-4 bg-green-500 text-white font-semibold rounded hover:bg-green-700" disabled>
+      <span id="submitBtnLoading" class="hidden">
+        <svg id="submitBtnLoadingSvg" class="hidden animate-spin h-5 w-5 text-white mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor"></circle>
+          <path class="opacity-75" fill="currentColor"
+            d="M4 12a8 8 0 018-8V1.5a.5.5 0 011 0V4h2.5a.5.5 0 010 1H13v2.5a.5.5 0 01-1 0V5h-2a.5.5 0 010-1h2v2.5a.5.5 0 01-1 0V3.67A8.001 8.001 0 014 12z">
+          </path>
+        </svg>
+      </span>
+      <span id="submitBtnText">Enviar</span>
+    </button>    
+  </div>
+
+  <p id="error-message" style="color: red"></p>
+</form>
+
+<div id="success-alert" class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white p-4 rounded shadow-lg">
+  Formulário enviado com sucesso!
+</div>
+
+<div id="error-alert" class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white p-4 rounded shadow-lg">
+  Erro ao enviar o formulário
+</div>
+
+<script type="module" src="/src/main.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailField = document.getElementById('email');
   const passwordField = document.getElementById('password');
   const confirmPasswordField = document.getElementById('confirm-password');
-  const submitButton = document.getElementById('submit-button');
+  const submitButton = document.getElementById('submitBtn');
   const successAlert = document.getElementById('success-alert');
   const errorAlert = document.getElementById('error-alert');
 
@@ -13,8 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const passwordError = document.getElementById('password-error');
   const confirmPasswordError = document.getElementById('confirm-password-error');
 
+  const submitBtnText = document.getElementById('submitBtnText');
+  const submitBtnLoading = document.getElementById('submitBtnLoadingSvg');
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    submitBtnText.textContent = 'Enviando';
+    submitBtnLoading.classList.remove('hidden');
+
+    const inputs = form.querySelectorAll('input');
+
 
     if (validateName() && validateEmail() && validatePasswords()) {
       try {
@@ -23,9 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
           nome: formData.get('name'),
           email: formData.get('email'),
           senha: formData.get('password'),
-          confirmacaoSenha: formData.get('password')
+          confirmacaoSenha: formData.get('confirm-password')
         };
-        
+
+        inputs.forEach(input => {
+          input.disabled = true;
+        });
+    
         const response = await fetch('http://localhost:8080', {
           method: 'POST',
           headers: {
@@ -34,22 +47,43 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           body: JSON.stringify(data)
         });
-
-        if (!response.ok) {
-          throw new Error('Erro ao enviar formulário.');
+    
+        const result = await response.json();
+    
+        if (!response.ok || result.erro) {
+          const errorMessage = result.tipoErro || 'Erro ao enviar formulário.';
+          throw new Error(errorMessage);
         }
-
+    
         successAlert.classList.remove('hidden');
-        successAlert.classList.remove('fade-out');
-        successAlert.classList.add('fade-in');
-        successAlert.textContent = 'Formulário enviado com sucesso!';
-        
+        setTimeout(() => {
+          successAlert.classList.add('fade-in');
+        }, 100);
+    
+        setTimeout(() => {
+          successAlert.classList.add('hidden');
+        }, 5000);
+    
         form.reset();
         updateSubmitButtonState();
       } catch (error) {
+        console.log(error);
+        errorAlert.textContent = ('Erro ao enviar formulário: '+ error.message);
         errorAlert.classList.remove('hidden');
-        errorAlert.textContent = 'Erro ao enviar formulário. Tente novamente mais tarde.';
+        setTimeout(() => {
+          errorAlert.classList.add('fade-in');
+        }, 100);
+    
+        setTimeout(() => {
+          errorAlert.classList.add('hidden');
+        }, 5000);
         console.error('Erro ao enviar formulário:', error);
+      } finally {
+        submitBtnText.textContent = 'Enviar';
+        submitBtnLoading.classList.add('hidden');
+        inputs.forEach(input => {
+          input.disabled = false;
+        });
       }
     }
   });

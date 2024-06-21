@@ -27,8 +27,8 @@ Projeto Javascript ES6:
 - ![PHP](https://img.shields.io/badge/-PHP-%23777BB4?logo=php&logoColor=white&style=flat)
 - ![Docker](https://img.shields.io/badge/-Docker-%232496ED?logo=docker&logoColor=white&style=flat)
 
-# Estrutura do Projeto:
-A estrutura do projeto é organizada da seguinte forma:
+# Estrutura do Projetos:
+A estrutura do projetos possuem a seguinte organização:
 
 Aplicação ReactJs
 ```bash 

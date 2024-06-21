@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../ui/button/Button.tsx';
 import InputField from '../ui/input/inputField.tsx';
 import imageSrc from '../assets/logo.png';
 import './RegistrationForm.css';
 import { submitFormData } from '../../api/api.js';
-import { validateConfirmPassword, validateEmail, validateName, validatePassword } from '../../utils/utils/validators.js';
+import { validateConfirmPassword, validateEmail, validateName, validatePassword } from '../../utils/validators/validators.js';
 
 const RegistrationForm: React.FC = () => {
   const [loading, setLoading] = useState(false);

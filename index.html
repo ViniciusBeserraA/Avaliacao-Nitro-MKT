@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Cadastro - Nitro MKT</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <form id="myForm" class="bg-white p-6 rounded shadow-md max-w-lg w-full">
+      
+      <div class="mb-4 flex items-center justify-center">
+        <img src="./src/assets/logo.png" width="120">
+      </div>
+      
+      <h2 class="text-2xl font-bold mb-6 text-center">Formulário de Cadastro</h2>
+
+      <div class="grid grid-cols-2 gap-4">
+
+        <div class="flex flex-col">
+          <label for="name" class="block text-sm font-medium text-gray-700">Nome Completo:</label>
+          <input type="text" id="name" name="name" required class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded">
+          <span id="name-error" class="error-message"></span>
+        </div>
+        <div class="flex flex-col">
+          <label for="email" class="block text-sm font-medium text-gray-700">Informe seu mail:</label>
+          <input type="email" id="email" name="email" required class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded">
+          <span id="email-error" class="error-message"></span>
+        </div>
+  
+        <div class="flex flex-col">
+          <label for="password" class="block text-sm font-medium text-gray-700">Informe sua Senha:</label>
+          <input type="password" id="password" name="password" required class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded">
+          <span id="password-error" class="error-message"></span>
+        </div>
+        <div class="flex flex-col">
+          <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirme sua Senha:</label>
+          <input type="password" id="confirm-password" name="confirm-password" required class="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded">
+          <span id="confirm-password-error" class="error-message"></span>
+        </div>
+      </div>
+ 
+      <div class="mt-4">
+        <button type="submit" id="submit-button" class="w-full py-2 px-4 bg-green-500 text-white font-semibold rounded hover:bg-green-700"  disabled>Enviar</button>
+      </div>
+      <p id="error-message" style="color: red"></p>
+    </form>
+
+    <div id="success-alert" class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white p-4 rounded shadow-lg">
+      Formulário enviado com sucesso!
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

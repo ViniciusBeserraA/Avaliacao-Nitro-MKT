@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Button from '../ui/button/Button.tsx';
 import InputField from '../ui/input/inputField.tsx';
 import imageSrc from '../assets/logo.png';
 import './RegistrationForm.css';
+import { submitFormData } from '../../api/api.js';
+import { validateConfirmPassword, validateEmail, validateName, validatePassword } from '../../utils/utils/validators.js';
 
 const RegistrationForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -38,27 +39,24 @@ const RegistrationForm: React.FC = () => {
     const newErrors: typeof errors = { nome: '', email: '', senha: '', confirmacaoSenha: '' };
     let isValid = true;
 
-    if (!formData.nome) {
-      newErrors.nome = 'O nome é obrigatório.';
+    if (!validateName(formData.nome)) {
+      newErrors.nome = 'Nome inválido'
+      setLoading(false);
       isValid = false;
     }
-    if (!formData.email) {
-      newErrors.email = 'O e-mail é obrigatório.';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'O e-mail é inválido.';
+    if (!validateEmail(formData.email)) {
+      newErrors.email = 'Email inválido'
+      setLoading(false);
       isValid = false;
     }
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    if (!formData.senha) {
-      newErrors.senha = 'A senha é obrigatória.';
-      isValid = false;
-    } else if (!passwordRegex.test(formData.senha)) {
-      newErrors.senha = 'A senha deve ter no mínimo 8 caracteres, incluindo 1 caractere minúsculo, 1 caractere maiúsculo e 1 numeral.';
+    if (!validatePassword(formData.senha)) {
+      newErrors.senha = 'A senha deve ter no mínimo 8 caracteres, incluindo 1 caractere minúsculo, 1 caractere maiúsculo e 1 numeral';
+      setLoading(false);
       isValid = false;
     }
-    if (formData.senha !== formData.confirmacaoSenha) {
-      newErrors.confirmacaoSenha = 'As senhas não coincidem.';
+    if (!validateConfirmPassword(formData.senha, formData.confirmacaoSenha)) {
+      newErrors.confirmacaoSenha = 'As senhas não coincidem';
+      setLoading(false);
       isValid = false;
     }
 
@@ -76,14 +74,9 @@ const RegistrationForm: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8080', formData, {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'ECA1AB4CE8583613A2C759B445E98',
-        },
-      });
+      const response = await submitFormData(formData);
 
-      if (response.status === 200) {
+      if (response) {
         setSuccessMessage('Formulário enviado com sucesso!');
         setErrorMessage('');
         setTimeout(() => {

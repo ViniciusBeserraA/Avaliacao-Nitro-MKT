@@ -1,0 +1,31 @@
+#submitBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  #submitBtnLoading {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+  }
+  
+  @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+  }
+  @keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+  }
+  
+  .animate-spin {
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }

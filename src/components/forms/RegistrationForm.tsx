@@ -120,6 +120,7 @@ const RegistrationForm: React.FC = () => {
           value={formData.nome}
           onChange={handleChange}
           error={errors.nome}
+          disabled={loading}
         />
         <InputField
           id="email"
@@ -129,6 +130,7 @@ const RegistrationForm: React.FC = () => {
           value={formData.email}
           onChange={handleChange}
           error={errors.email}
+          disabled={loading}
         />
         <InputField
           id="senha"
@@ -138,6 +140,7 @@ const RegistrationForm: React.FC = () => {
           value={formData.senha}
           onChange={handleChange}
           error={errors.senha}
+          disabled={loading}
         />
         <InputField
           id="confirmacaoSenha"
@@ -147,6 +150,7 @@ const RegistrationForm: React.FC = () => {
           value={formData.confirmacaoSenha}
           onChange={handleChange}
           error={errors.confirmacaoSenha}
+          disabled={loading}
         />
       </div>
 

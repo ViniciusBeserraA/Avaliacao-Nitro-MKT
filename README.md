@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Teste técnico Nitro MKT:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este repositório contem 2 branches distintas, sendo uma, um aplicativo ReactJS com Typescript (formulário de cadastro), que utiliza Axios para fazer requisições HTTP e uma aplicação javascript ES6 com Bundler Vite com Babel, sendo ambos projetos identicos (formulario de cadastro)
 
-## Available Scripts
+## Pré-Requisitos:
 
-In the project directory, you can run:
+Antes de começar, verifique se o seu ambiente atende aos seguintes requisitos:
 
-### `npm start`
+- Node.js (versão 12 ou superior)
+- npm (gerenciador de pacotes do Node.js)
+- Docker (opcional, para execução de ambientes locais)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tecnologias utilizadas em ambos os projetos:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ Projeto React:
+- ![React](https://img.shields.io/badge/-React-%2361DAFB?logo=react&logoColor=white&style=flat)
+- ![Tailwind CSS](https://img.shields.io/badge/-Tailwind_CSS-%2338B2AC?logo=tailwind-css&logoColor=white&style=flat)
+- ![Axios](https://img.shields.io/badge/-Axios-%23239AD6?logo=axios&logoColor=white&style=flat)
+- ![PHP](https://img.shields.io/badge/-PHP-%23777BB4?logo=php&logoColor=white&style=flat)
+- ![Docker](https://img.shields.io/badge/-Docker-%232496ED?logo=docker&logoColor=white&style=flat)
 
-### `npm test`
+Projeto Javascript ES6:
+- ![JavaScript](https://img.shields.io/badge/-JavaScript-%23F7DF1E?logo=javascript&logoColor=black&style=flat)
+- ![Tailwind CSS](https://img.shields.io/badge/-Tailwind_CSS-%2338B2AC?logo=tailwind-css&logoColor=white&style=flat)
+- ![Babel](https://img.shields.io/badge/-Babel-%23F9DC3E?logo=babel&logoColor=white&style=flat)
+- ![Vite](https://img.shields.io/badge/-Vite-%2300C4CC?logo=vite&logoColor=white&style=flat)
+- ![PHP](https://img.shields.io/badge/-PHP-%23777BB4?logo=php&logoColor=white&style=flat)
+- ![Docker](https://img.shields.io/badge/-Docker-%232496ED?logo=docker&logoColor=white&style=flat)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Estrutura do Projeto:
+A estrutura do projeto é organizada da seguinte forma:
 
-### `npm run build`
+Aplicação ReactJs
+```bash 
+├── public/            # Arquivos públicos do projeto
+├── src/               # Código fonte do projeto ReactJS
+│   ├── api/           # Arquivos para requisicao   
+│   ├── utils/         # Arquivos de validadores, conversores, etc..,
+│   │     validators/  # Arquivos para validacao   
+│   ├── utils/         # Arquivos para requisicao   
+│   ├── index.tsx      # Ponto de entrada da aplicação
+│   ├── index.css      # Estilizacao Global
+├── package.json       # Metadados do projeto e dependências
+└── README.md          # Este arquivo
+```
+Aplicação Javascript ES6
+```bash 
+├── public/            # Arquivos públicos do projeto
+├── src/               # Código fonte do projeto ReactJS
+│   ├── assets/        # Imagens, fontes, etc...   
+│   ├── main.js        # Validação do formulário e requisicao HTTP
+│   ├── style.css      # Estilizacao Global
+├── index.html         # Página html contendo o formulário
+├── package.json       # Metadados do projeto e dependências
+└── README.md          # Este arquivo
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Instalação:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Para instalar e executar o projeto localmente, siga estes passos:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone o repositório: `git clone https://github.com/ViniciusBeserraA/Avaliacao-Nitro-MKT.git`
+2. Entre no diretório do projeto: `reactJs` ou `javascriptES6`
+3. Instale as dependências: `npm install`
 
-### `npm run eject`
+## Atenção para o seguinte detalhe ao executar a aplicação:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Antes de iniciar a requisicoes desse projeto, verifique se o arquivo php, no qual que esteja rodando, possua as seguintes linhas header:
+```javascript
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, x-api-key');
+header('Access-Control-Allow-Credentials: true');
+```
+Essa alteração permite que aplicação funcione sem que ocorra o erro de CORS.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Como executar o servidor do back-end:
+Para executar o servidor basta executar os seguintes comandos dentro da pasta _backend_
+```
+docker build --tag 'backend_teste_tecnico' .
+```
+```
+docker run -p 8080:8080 backend_teste_tecnico
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+O servidor estará disponível no endereço ``http://localhost:8080``
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Como executar o projeto front-end: 
+Para executar o projeto, usar o seguinte comando:
 
-## Learn More
+Aplicação ReactJs
+```bash 
+npm run dev
+```
+Aplicação Javascript ES6
+```bash 
+npm run start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Validação de Formulário:
+Para garantir que os dados inseridos pelo usuário sejam corretos e atendam aos requisitos mínimos, o formulário também é validado no front-end. Abaixo estão as regras de validação para cada campo:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Nome:**
+  - Obrigatório
 
-### Code Splitting
+- **Email:**
+  - Obrigatório
+  - Deve ser um e-mail válido (seguido do formato padrão de e-mail)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Senha:**
+  - Obrigatório
+  - Mínimo de 8 caracteres
+  - Pelo menos 1 caractere minúsculo
+  - Pelo menos 1 caractere maiúsculo
+  - Pelo menos 1 numeral
 
-### Analyzing the Bundle Size
+- **Confirmação de senha:**
+  - Obrigatório
+  - Deve ser idêntico ao campo **Senha**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Requisições ao backend:
+Ao enviar a requisição o back-end fará a validação dos campos, caso algum campo não passe na validação receberá um erro 400 com o seguinte corpo:
+```json
+{
+    "erro": true,
+    "tipoErro": "CAMPO_INVALIDO",
+    "nomeCampo": "<Nome do campo>"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Ao enviar a requisição o back-end com um email indisponível receberá um erro 400 com o seguinte corpo:
+```json
+{
+    "erro": true,
+    "tipoErro": "USUARIO_EXISTENTE"
+}
+```

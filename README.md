@@ -21,8 +21,6 @@ Antes de começar, verifique se o seu ambiente atende aos seguintes requisitos:
 # Estrutura do Projeto:
 A estrutura do projeto é organizada da seguinte forma:
 ```bash 
-csharp
-Copiar código
 ├── public/            # Arquivos públicos do projeto
 ├── src/               # Código fonte do projeto ReactJS
 │   ├── api/           # Arquivos para requisicao   

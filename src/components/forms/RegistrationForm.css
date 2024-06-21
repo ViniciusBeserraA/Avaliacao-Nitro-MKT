@@ -2,39 +2,13 @@ form div {
     margin-bottom: 15px;
   }
   
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
   .error {
     border-color: red;
   }
+
   .error-message {
     color: red;
     font-size: 0.9em;
-  }
-  .hidden {
-    display: none;
-  }
-  .fade-in {
-    animation: fadeIn 1s;
-  }
-  
-  .fade-out {
-    animation: fadeOut 1s forwards;
-  }
-  
- 
-  
-  .error {
-    border-color: #e53e3e;
   }
   
   

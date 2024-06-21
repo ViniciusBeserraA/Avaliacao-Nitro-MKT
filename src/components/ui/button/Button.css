@@ -1,16 +1,21 @@
+.hidden{
+  display: none;
+}
+
 #submitBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-  
-  #submitBtnLoading {
-    display: flex;
-    align-items: center;
-    margin-right: 0.5rem;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#submitBtnLoading {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+
   @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

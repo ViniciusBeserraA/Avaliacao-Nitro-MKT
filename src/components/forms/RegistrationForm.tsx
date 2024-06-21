@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '../ui/button/Button.tsx';
+import InputField from '../ui/input/inputField.tsx';
 import imageSrc from '../assets/logo.png';
+import './RegistrationForm.css';
 
 const RegistrationForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,7 @@ const RegistrationForm: React.FC = () => {
     senha: '',
     confirmacaoSenha: '',
   });
-
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -70,7 +72,6 @@ const RegistrationForm: React.FC = () => {
     if (!validateForm()) {
       return;
     }
-    
 
     setLoading(true);
 
@@ -82,8 +83,6 @@ const RegistrationForm: React.FC = () => {
         },
       });
 
-  
-
       if (response.status === 200) {
         setSuccessMessage('Formulário enviado com sucesso!');
         setErrorMessage('');
@@ -94,7 +93,7 @@ const RegistrationForm: React.FC = () => {
         throw new Error('Erro ao enviar formulário.');
       }
     } catch (error) {
-      setErrorMessage(`Erro ao enviar formulário: ${error.response.data.tipoErro}`);
+      setErrorMessage(`Erro ao enviar formulário: ${error.response?.data?.tipoErro || error.message}`);
       setSuccessMessage('');
       setTimeout(() => {
         setErrorMessage('');
@@ -113,69 +112,46 @@ const RegistrationForm: React.FC = () => {
       <h2 className="text-2xl font-bold mb-6 text-center">Formulário de Cadastro</h2>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="flex flex-col">
-          <label htmlFor="nome" className="block text-sm font-medium text-gray-700">
-            Nome Completo:
-          </label>
-          <input
-            type="text"
-            id="nome"
-            name="nome"
-            value={formData.nome}
-            onChange={handleChange}
-            className="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out disabled:opacity-50 disabled:pointer-events-none"
-          />
-          {errors.nome && <span id="name-error" className="text-red-500 text-sm">{errors.nome}</span>}
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Informe seu E-mail:
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out disabled:opacity-50 disabled:pointer-events-none"
-          />
-          {errors.email && <span id="email-error" className="text-red-500 text-sm">{errors.email}</span>}
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="senha" className="block text-sm font-medium text-gray-700">
-            Informe sua Senha:
-          </label>
-          <input
-            type="password"
-            id="senha"
-            name="senha"
-            value={formData.senha}
-            onChange={handleChange}
-            className="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out disabled:opacity-50 disabled:pointer-events-none"
-          />
-          {errors.senha && <span id="password-error" className="text-red-500 text-sm">{errors.senha}</span>}
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="confirmacaoSenha" className="block text-sm font-medium text-gray-700">
-            Confirme sua Senha:
-          </label>
-          <input
-            type="password"
-            id="confirmacaoSenha"
-            name="confirmacaoSenha"
-            value={formData.confirmacaoSenha}
-            onChange={handleChange}
-            className="mt-1 block w-full p-2 bg-gray-100 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-150 ease-in-out disabled:opacity-50 disabled:pointer-events-none"
-          />
-          {errors.confirmacaoSenha && <span id="confirm-password-error" className="text-red-500 text-sm">{errors.confirmacaoSenha}</span>}
-        </div>
+        <InputField
+          id="nome"
+          name="nome"
+          type="text"
+          label="Nome Completo:"
+          value={formData.nome}
+          onChange={handleChange}
+          error={errors.nome}
+        />
+        <InputField
+          id="email"
+          name="email"
+          type="email"
+          label="Informe seu E-mail:"
+          value={formData.email}
+          onChange={handleChange}
+          error={errors.email}
+        />
+        <InputField
+          id="senha"
+          name="senha"
+          type="password"
+          label="Informe sua Senha:"
+          value={formData.senha}
+          onChange={handleChange}
+          error={errors.senha}
+        />
+        <InputField
+          id="confirmacaoSenha"
+          name="confirmacaoSenha"
+          type="password"
+          label="Confirme sua Senha:"
+          value={formData.confirmacaoSenha}
+          onChange={handleChange}
+          error={errors.confirmacaoSenha}
+        />
       </div>
 
       <div className="mt-4">
-        <Button type="submit" isLoading={loading} children={'Enviar'} />
+        <Button type="submit" isLoading={loading} children={loading ? 'Enviando' : 'Enviar'} />
       </div>
 
       {successMessage && (
